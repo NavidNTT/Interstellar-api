@@ -87,6 +87,30 @@ class ExplorationApiTest extends TestCase
     }
 
     #[DataProvider('apiPrefixes')]
+    public function test_seeded_bodies_match_the_seed_source_by_slug(string $prefix): void
+    {
+        $this->seed(ExplorationSeeder::class);
+        $source = json_decode(file_get_contents(database_path('seeders/data/exploration.json')), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertCount(9, $source['bodies']);
+        $this->assertSame(['sun', 'earth', 'mars', 'mercury', 'venus', 'jupiter', 'saturn', 'uranus', 'neptune'], array_column($source['bodies'], 'slug'));
+        $collection = $this->getJson($prefix.'/celestial-bodies')->assertOk()->assertJsonCount(9, 'data');
+        // The API orders by scene_orbit_radius, so source and response records are matched by slug.
+        $this->assertEqualsCanonicalizing(array_column($source['bodies'], 'slug'), array_column($collection->json('data'), 'slug'));
+        foreach ($source['bodies'] as $body) {
+            $record = $this->getJson($prefix.'/celestial-bodies/'.$body['slug'])->assertOk()->json('data');
+            foreach ($record as $field => $actual) {
+                $expected = $body[$field];
+                if (is_int($expected) || is_float($expected)) {
+                    $this->assertEqualsWithDelta((float) $expected, (float) $actual, 1e-9, $body['slug'].'.'.$field);
+                } else {
+                    $this->assertSame($expected, $actual, $body['slug'].'.'.$field);
+                }
+            }
+            $this->assertTrue(CelestialBody::query()->where('slug', $body['slug'])->sole()->is_active);
+        }
+    }
+
+    #[DataProvider('apiPrefixes')]
     public function test_destination_order_uses_sequence_instead_of_insertion_order(string $prefix): void
     {
         $mission = Mission::factory()->create();
@@ -103,12 +127,14 @@ class ExplorationApiTest extends TestCase
         $unrelated = CelestialBody::factory()->create();
         $this->seed(ExplorationSeeder::class);
         $this->seed(ExplorationSeeder::class);
-        $this->assertDatabaseCount('celestial_bodies', 4);
+        // Nine seeded bodies plus the unrelated factory body.
+        $this->assertDatabaseCount('celestial_bodies', 10);
         $this->assertDatabaseCount('missions', 5);
         $this->assertDatabaseCount('mission_destinations', 8);
         $this->assertModelExists($unrelated);
-        $response = $this->getJson($prefix.'/celestial-bodies')->assertOk()->assertJsonCount(4, 'data');
-        foreach (['sun', 'earth', 'mars'] as $slug) {
+        // The collection also returns the unrelated active factory body.
+        $response = $this->getJson($prefix.'/celestial-bodies')->assertOk()->assertJsonCount(10, 'data');
+        foreach (['sun', 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'] as $slug) {
             $response->assertJsonFragment(['slug' => $slug]);
             $this->getJson($prefix.'/celestial-bodies/'.$slug)->assertOk()->assertJsonPath('data.slug', $slug)->assertJsonMissingPath('data.id')->assertJsonMissingPath('data.created_at');
         }
