@@ -1,0 +1,208 @@
+{
+  "bodies": [
+    {
+      "slug": "sun",
+      "name": "Sun",
+      "type": "star",
+      "scene_radius": 1.8,
+      "scene_orbit_radius": 0,
+      "color": "#ffb347",
+      "short_description": "The warm, luminous anchor of this small prototype system.",
+      "full_description": "The Sun is the star at the center of our solar system. Its gravity holds the planets, dwarf planets, asteroids, and comets in orbit, while its energy powers the climate and chemistry of Earth.",
+      "diameter": "1,392,700 km",
+      "mass": "1.989 × 10³⁰ kg",
+      "gravity": "274 m/s²",
+      "average_temperature": "5,500°C at the photosphere",
+      "distance_from_sun": "Central star",
+      "orbital_period": "—",
+      "rotation_period": "25–35 Earth days",
+      "number_of_moons": "—",
+      "number_of_planets": "8",
+      "atmosphere": "Hydrogen and helium plasma; no solid surface",
+      "composition": "About 74% hydrogen and 24% helium by mass, with heavier elements making up the remainder.",
+      "interesting_facts": [
+        "Contains more than 99% of the solar system's total mass.",
+        "Light from the Sun reaches Earth in about 8 minutes 20 seconds.",
+        "Its visible surface is called the photosphere."
+      ],
+      "is_active": true
+    },
+    {
+      "slug": "earth",
+      "name": "Earth",
+      "type": "planet",
+      "scene_radius": 0.62,
+      "scene_orbit_radius": 5.4,
+      "color": "#4d9de0",
+      "short_description": "A blue world with a hint of green, orbiting in the inner system.",
+      "full_description": "Earth is a rocky planet with stable surface oceans and a nitrogen-rich atmosphere. It is the only world currently known to support life, with a dynamic climate shaped by its atmosphere, oceans, and magnetic field.",
+      "diameter": "12,742 km",
+      "mass": "5.972 × 10²⁴ kg",
+      "gravity": "9.81 m/s²",
+      "average_temperature": "About 15°C global average",
+      "distance_from_sun": "149.6 million km",
+      "orbital_period": "365.25 Earth days",
+      "rotation_period": "23 hours 56 minutes",
+      "number_of_moons": "1",
+      "number_of_planets": "—",
+      "atmosphere": "About 78% nitrogen, 21% oxygen, and 1% argon and trace gases",
+      "composition": "A rocky silicate mantle and crust surrounding an iron-rich core.",
+      "interesting_facts": [
+        "Liquid surface water covers roughly 71% of the planet.",
+        "Earth's magnetic field helps deflect charged particles from the solar wind.",
+        "Its atmosphere and oceans continuously exchange heat and moisture."
+      ],
+      "is_active": true
+    },
+    {
+      "slug": "mars",
+      "name": "Mars",
+      "type": "planet",
+      "scene_radius": 0.48,
+      "scene_orbit_radius": 8.2,
+      "color": "#c9684b",
+      "short_description": "A rust-colored outer neighbor on a wider representative orbit.",
+      "full_description": "Mars is a cold, dusty terrestrial planet with a thin atmosphere and a surface marked by impact craters, volcanoes, valleys, and polar ice. Its iron-rich minerals give the landscape its characteristic red color.",
+      "diameter": "6,779 km",
+      "mass": "6.39 × 10²³ kg",
+      "gravity": "3.71 m/s²",
+      "average_temperature": "About −63°C global average",
+      "distance_from_sun": "227.9 million km",
+      "orbital_period": "687 Earth days",
+      "rotation_period": "24 hours 37 minutes",
+      "number_of_moons": "2",
+      "number_of_planets": "—",
+      "atmosphere": "About 95% carbon dioxide, 2.7% nitrogen, and 1.6% argon",
+      "composition": "Rocky silicates with an iron-rich core and iron oxide dust on the surface.",
+      "interesting_facts": [
+        "Olympus Mons is the largest known volcano in the solar system.",
+        "A Martian day, called a sol, is only about 40 minutes longer than an Earth day.",
+        "Mars has two small moons named Phobos and Deimos."
+      ],
+      "is_active": true
+    }
+  ],
+  "missions": [
+    {
+      "slug": "first-contact",
+      "title": "First Contact",
+      "category": "travel",
+      "difficulty": "introductory",
+      "description": "Begin your exploration with a journey to our blue home world.",
+      "objective": "Travel to Earth and arrive at its observation point.",
+      "estimated_duration": "Under 1 minute",
+      "completion_label": "Earth observation point reached",
+      "is_active": true,
+      "destinations": [
+        {
+          "slug": "earth-visit",
+          "body_slug": "earth",
+          "sequence": 1,
+          "kind": "visit",
+          "objective": "Arrive at Earth"
+        }
+      ]
+    },
+    {
+      "slug": "red-planet",
+      "title": "Red Planet Approach",
+      "category": "travel",
+      "difficulty": "introductory",
+      "description": "Set a course for the rust-colored neighbor of Earth.",
+      "objective": "Travel to Mars and arrive at its observation point.",
+      "estimated_duration": "Under 1 minute",
+      "completion_label": "Mars observation point reached",
+      "is_active": true,
+      "destinations": [
+        {
+          "slug": "mars-visit",
+          "body_slug": "mars",
+          "sequence": 1,
+          "kind": "visit",
+          "objective": "Arrive at Mars"
+        }
+      ]
+    },
+    {
+      "slug": "solar-observation",
+      "title": "Solar Observation",
+      "category": "observation",
+      "difficulty": "introductory",
+      "description": "Observe the star that anchors this solar system from a representative viewpoint.",
+      "objective": "Travel to the Sun's observation point.",
+      "estimated_duration": "Under 1 minute",
+      "completion_label": "Solar observation point reached",
+      "is_active": true,
+      "destinations": [
+        {
+          "slug": "sun-visit",
+          "body_slug": "sun",
+          "sequence": 1,
+          "kind": "visit",
+          "objective": "Arrive at the Sun"
+        }
+      ]
+    },
+    {
+      "slug": "inner-survey",
+      "title": "Inner System Survey",
+      "category": "travel",
+      "difficulty": "standard",
+      "description": "Explore two rocky worlds in a short guided itinerary.",
+      "objective": "Arrive at Earth, then travel to Mars.",
+      "estimated_duration": "1–2 minutes",
+      "completion_label": "Inner system survey complete",
+      "is_active": true,
+      "destinations": [
+        {
+          "slug": "survey-earth",
+          "body_slug": "earth",
+          "sequence": 1,
+          "kind": "visit",
+          "objective": "Arrive at Earth"
+        },
+        {
+          "slug": "survey-mars",
+          "body_slug": "mars",
+          "sequence": 2,
+          "kind": "visit",
+          "objective": "Arrive at Mars"
+        }
+      ]
+    },
+    {
+      "slug": "stellar-neighborhood",
+      "title": "Stellar Neighborhood",
+      "category": "science",
+      "difficulty": "standard",
+      "description": "Discover the scientific profiles of our star and its two featured planets.",
+      "objective": "Open scientific details for the Sun, then Earth, then Mars after starting this mission.",
+      "estimated_duration": "2–3 minutes",
+      "completion_label": "Stellar neighborhood inspected",
+      "is_active": true,
+      "destinations": [
+        {
+          "slug": "inspect-sun",
+          "body_slug": "sun",
+          "sequence": 1,
+          "kind": "inspect",
+          "objective": "Open Sun details"
+        },
+        {
+          "slug": "inspect-earth",
+          "body_slug": "earth",
+          "sequence": 2,
+          "kind": "inspect",
+          "objective": "Open Earth details"
+        },
+        {
+          "slug": "inspect-mars",
+          "body_slug": "mars",
+          "sequence": 3,
+          "kind": "inspect",
+          "objective": "Open Mars details"
+        }
+      ]
+    }
+  ]
+}
